@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create New Account</title>
+    <link rel="Short Icon" type="image/png" ; th:href="@{/icon/insta-icon.png}">
+    <style>
+        #login-form{
+            margin: 5% 0% 0% 25%;
+            border: 0.5px solid rgb(216, 212, 212);
+            width: 350px;
+            height: 590px;
+        }
+        #login-form img{
+            margin-top: 8%;
+            padding-left: 20%;
+            height: 60px;
+        }
+        #login-form form{
+            margin-top: 8%;
+            padding-left: 12%;
+            height: 60px;
+        }
+        #login-form form input{
+           width: 250px;
+           height: 35px;
+        }
+        #picture{
+            border-radius: 40%;
+            margin-left: 23%;
+        }
+        #acc-form{
+            margin-left: 25%;
+            padding-left: 60px;
+            border: 0.5px solid rgb(216, 212, 212);
+            width: 290px;
+            height: 60px; 
+        }
+        #g-form p{
+            margin-left: 32%;
+            padding-left: 60px;
+            width: 290px;
+            
+        }
+        #g-form span{
+            margin-left: 23%;
+            padding-left: 60px;
+            width: 290px;
+        }
+
+    </style>
+</head>
+<body>
+    <div style="margin: 3% 0% 0% 15%;">
+    
+    <div id="login-form">
+        <img th:src="@{/icon/insta-logo.png}"><br>
+        <p th:text="${existingUser}" style="color:red; position:absolute; margin:-2px;margin-left:100px;"></p>
+        <b ><p style="padding-left: 90px;">Sign up to see photos and</p><p style="padding-left: 90px;margin-top: -12px;"> videos from your friends.</p></b>
+        <form th:action="@{/register}" th:method="post">
+            <input type="email" placeholder="Phone  number or email address" name="email" required><br><br>
+            <input type="text" placeholder="Full Name" name="fullName" required><br><br>
+            <input type="text" placeholder="Username" name="userName" required><br><br>
+            <input type="password" placeholder="password" name="password" required minlength="5"><br><br>
+            <div style="font-size: 12px;"><p>People who use our service may have uploaded</p>
+            <p style="margin-top: -12px;">your contact information to Instagram.<a href="#">Learn More</a></p>
+            <p>By signing up, you agree to our <a href="#">Terms,</a></p> <p style="margin-top: -12px;"><a href="#">Privacy Policy</a> and <a href="#">Coockies Policy</a>.</p>
+            <input type="submit" value="Sign up" style="border-radius: 10px; background-color: cornflowerblue;">
+        </div>
+        </form><br>
+        </div><br>
+        
+    </div>
+    
+</body>
+</html>

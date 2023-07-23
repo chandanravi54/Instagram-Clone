@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Home</title>
+  <link rel="Short Icon" type="image/png" ; th:href="@{/icon/insta-icon.png}">
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+      .container {
+      display: flex;
+      height: 100%;
+    }
+      .left-panel {
+      flex: 1;
+      background-color: white;
+      border-right: .5px solid grey;
+    }
+    .right-panel{
+    flex: 4;
+    overflow: auto;
+    display: flex;
+    margin-top:50px;
+    }
+      .left-panel img {
+      margin-top: 38px;
+      margin-left: 15px;
+      width: 120px;
+    }
+      .left-panel a {
+      text-decoration: none;
+      color: black;
+      font-size: 20px;
+      margin-left: 15px;
+    }
+      #short-form span a {
+      margin-left: 10%;
+      color: black;
+      text-decoration: none;
+    }
+      #createPost{
+      display: none;
+      position: absolute;
+      margin:10% 25% 25% 35%;
+      border: 1px solid black;
+      height: 500px;
+      width: 370px;
+      background-color: white;
+      border-radius:20px;
+    }
+
+     #home-img{
+      height:550px;
+      margin:20px 0px 10px 80px;
+    }
+     #home-post{
+      margin-left:100px;
+}
+
+
+  </style>
+  <script>
+    function allNone(){
+      var func = document.getElementById("user-edit");
+      var func1 = document.getElementById("setting");
+      var func1 = document.getElementById("createPost");
+        func1.style.display="none";
+        func.style.display = "none";
+   }
+    function openCreatePost(){
+      var func = document.getElementById("createPost");
+      if (func.style.display === "none") {
+        func.style.display = "block";
+      } else {
+        func.style.display = "none";
+      }
+    }
+
+</script>
+</head>
+
+<body>
+
+<div id="createPost" >
+  <img th:src="@{/icon/publish.png}" onclick="allNone()"><br>
+  <form th:action="@{/publish-post}" th:method="post" style="padding-left:80px;" enctype="multipart/form-data">
+    <label><b>Upload Picture/Video</b></label><br>
+    <input type="file" name="file" multiple required placeholder="upload Picture/Video" ><br>
+    <label><b>Caption</b></label><br>
+    <textarea name="caption" placeholder="Write Your Caption ..." required></textarea><br>
+    <label><b>Tags</b></label><br>
+    <textarea type="text" name="tags" placeholder="tag1 tag2 ..."></textarea><br>
+    <label><b>Location</b></label><br>
+    <input type="text" name="location" placeholder="location"><br>
+    <input type="submit" value="Publish Post" >
+  </form>
+</div>
+<div class="container">
+  <div class="left-panel">
+    <img th:src="@{/icon/insta-logo.png}"><br>
+    <a href=""><img th:src="@{/icon/home.png}" style="height: 20px; width: 25px;"><span> Home</span></a><br>
+    <a href=""><img th:src="@{/icon/search.png}" style="height: 25px; width: 25px;"><span> Search</span></a><br>
+    <a href=""><img th:src="@{/icon/explore.png}" style="height: 25px; width: 25px;"><span> Explore</span></a><br>
+    <a href=""><img th:src="@{/icon/reels.png}" style="height: 25px; width: 25px;"><span> Reels</span></a><br>
+    <a href=""><img th:src="@{/icon/massage.png}" style="height: 25px; width: 25px;"><span> Messages</span></a><br>
+    <a href=""><img th:src="@{/icon/notification.png}" style="height: 25px; width: 25px;"><span> Notifications</span></a><br>
+    <a onclick="openCreatePost()"><img th:src="@{/icon/create.png}" style="height: 25px; width: 25px;"><span> Create</span></a><br>
+    <a href="/profile"><img th:src="@{/icon/profile.png}" style="height: 25px; width: 25px; border-radius: 50%;"><span> Profile</span></a><br>
+    <a href="/profile"><img th:src="@{/icon/more.png}" style="height: 25px; width: 25px;"><span>  More</span></a><br>
+  </div>
+  <div class="right-panel">
+    <div id="right-left-panel" style="flex:4;">
+  <div th:each="var: ${allPosts}">
+    <span id="home-post"><b>Chandan_Ravi_4159</b></span><br>
+    <a th:href="@{/all-view/{id}/{start}(id=${var.postId},start=${0})}"><img th:src="@{/view/{id}(id=${var.postId})}" id="home-img"></a><br>
+    <pre style="margin-left:100px;"><img th:src="@{/icon/favorite1.png}"><img th:src="@{/icon/favorite.png}">   <a th:href="@{/all-view/{id}/{start}(id=${var.postId},start=${0})}"><img th:src="@{/icon/comment.png}"></a></pre>
+    <form style="margin-left:80px;">
+      <input type="text" placeholder="Type Your Comment..">
+      <input type="submit" value="post">
+    </form>
+    <br>
+    <hr style="width:80%;">
+  </div>
+    </div>
+      <div id="right-right-panel" style="flex:2; padding-right:20px;">
+      <span><img th:src="@{/icon/profile.png}" style="height:40px; border-radius:50%;"><span style="font-size:25px; margin-left:20px;" >chandan_ravi_4159</span></span>
+       <hr>
+        <p><span style="font-size:20px;color:gray;">Suggested for you</span><span style="float:right;">See All </span></span></p>
+      </div>
+  </div>
+</div>
+</body>
+</html>

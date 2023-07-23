@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      height: 100%;
+    }
+
+    .left,
+    .right {
+      flex: 1;
+      height: 100%;
+       margin-right: 10px;
+        display: flex;
+  flex-direction: column;
+    }
+
+    .left {
+      background-color: #f2f2f2;
+        justify-content: center;
+  align-items: center;
+    }
+    .thumbnail-image {
+      width: 500px;
+      height: 500px;
+      margin:25px 80px 30px 120px;
+    }
+    #close{
+    margin-left:95%;
+    }
+
+.comment-section {
+  position: fixed;
+  bottom: 0;
+  left: 50px;
+  width: 40%;
+}
+
+.comment-section textarea {
+  width: 100%;
+}
+
+.comment-section button {
+  margin-top: 10px;
+  margin-left: 300px;
+   width: 100px;
+   margin-bottom: 30px;
+}
+
+button {
+  width: 100px;
+  margin: 5px;
+  margin-right: 2px;
+}
+
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="left">
+        <div  >
+            <img th:src="@{/viewPic/{id}/{start}(id=${post.postId},start=${currentPage})}" class="thumbnail-image">
+        </div>
+
+
+        <a th:href="@{/all-view/{id}/{start}(id=${post.postId},start=${currentPage-1})}"><button
+                th:if="${currentPage > 0}" style="margin-top:-50%;">&lt;&lt;previous</button></a>
+        <a th:href="@{/all-view/{id}/{start}(id=${post.postId},start=${currentPage+1})}"><button
+            th:if="${currentPage < totalPages-1}" style="float: right;">next>></button></a>
+        <br>
+        <div >
+            <form th:action="@{'/add-comment/' + ${post.postId}}" method="post">
+                <textarea name="commentText" placeholder="Add a comment..." required noresize></textarea><br>
+                <button type="submit">Comment</button>
+            </form>
+        </div>
+    </div>
+    <div class="right">
+        <a th:href="@{/profile}" id="close"><img th:src="@{/icon/close.png}"></a>
+        <div>
+            <h2>Comments:</h2>
+            <hr>
+            <ul>
+                <li th:each="comment : ${post.comments}">
+                    <!--                    <span th:text="${comment.user.username}"></span>:-->
+                    <span  class="comment-text" th:text="${comment.commentText}"></span>
+                    <form th:action="@{'/delete-comment/' + ${comment.id}}"  style="display: inline;">
+                        <button type="submit">Delete</button>
+                    </form>
+                    <form th:action="@{'/edit-comment/' + ${comment.id}}"  style="display: inline;">
+                        <button type="submit">Edit</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

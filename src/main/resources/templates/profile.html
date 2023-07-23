@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Profile</title>
+    <link rel="Short Icon" type="image/png" ; th:href="@{/icon/insta-icon.png}">
+    <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      display: flex;
+      height: 100%;
+    }
+
+    .left-panel {
+      flex: 1;
+      background-color: white;
+      border-right: .5px solid grey;
+
+    }
+
+    .left-panel img {
+      margin-top: 38px;
+      margin-left: 15px;
+      width: 120px;
+    }
+      .left-panel a {
+      text-decoration: none;
+      color: black;
+      font-size: 20px;
+      margin-left: 15px;
+ }
+
+    a:hover{
+     cursor:grab;
+    }
+  .right-panel {
+      flex: 4;
+      background-color: white;
+      overflow: auto;
+      margin-top: 20px;
+    }
+
+    #profile {
+      display: flex;
+      height: 350px;
+      ;
+    }
+
+    #left-p {
+      flex: 2;
+    }
+
+    #left-p img {
+      border-radius: 120px;
+      height: 130px;
+      margin: 40px 0px 0px 100px;
+    }
+
+    #right-p {
+      margin-top: 40px;
+      flex: 4;
+    }
+
+    .details {
+      margin-left: 22px;
+    }
+
+    footer {
+ margin: 100px 0px 50px 160px;
+       font-size: 10px;
+    }
+
+    footer a {
+      text-decoration: none;
+      color: gray;
+    }
+
+    #short-form span a {
+      margin-left: 10%;
+      color: black;
+      text-decoration: none;
+    }
+    #setting{
+      display: none;
+      position: absolute;
+      margin:15% 25% 25% 50%;
+      border: 1px solid black;
+      border-radius:20px;
+      height: 300px;
+      width: 300px;
+      background-color: white;
+      text-align: center;
+    }
+    #setting a{
+
+       text-decoration:none;
+      color:black;
+    }
+    #setting button{
+      margin-left: 60px;
+    }
+    #user-edit{
+      display: none;
+      position: absolute;
+      margin:10% 25% 25% 35%;
+      border: 1px solid black;
+      height: 400px;
+      width: 500px;
+      background-color: white;
+      border-radius:20px;
+    }
+    #createPost{
+      display: none;
+      position: absolute;
+      margin:10% 25% 25% 35%;
+      border: 1px solid black;
+      height: 500px;
+      width: 370px;
+      background-color: white;
+      border-radius:20px;
+    }
+    #createPost img{
+          border-radius:20px;
+}
+     .thumbnail-image {
+      width: 350px;
+      height: 350px;
+      margin-left:5px;
+    }
+    .image-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1px;
+    }
+
+  </style>
+    <script>
+    function settingPopup(){
+      var func = document.getElementById("setting");
+      if (func.style.display === "none") {
+        func.style.display = "block";
+      } else {
+        func.style.display = "none";
+      }
+    }
+  </script>
+    <script>
+    function editUser(){
+      var func = document.getElementById("user-edit");
+      if (func.style.display === "none") {
+        func.style.display = "block";
+      } else {
+        func.style.display = "none";
+      }
+    }
+  </script>
+    <script>
+    function allNone(){
+      var func = document.getElementById("user-edit");
+      var func1 = document.getElementById("setting");
+      var func1 = document.getElementById("createPost");
+        func1.style.display="none";
+        func.style.display = "none";
+
+    }
+    function openCreatePost(){
+      var func = document.getElementById("createPost");
+      if (func.style.display === "none") {
+        func.style.display = "block";
+      } else {
+        func.style.display = "none";
+      }
+    }
+
+  </script>
+</head>
+
+<body>
+
+<div id="setting"><br>
+    <a>Apps & websites</a><br><hr>
+    <a>Notifications</a><br><hr>
+    <a>Settings & Privacy</a><br><hr>
+    <a>QR Code</a><br><hr>
+    <a>Help</a><br><hr>
+    <a>Logout</a><br><hr>
+    <a th:href="@{/profile}">Cancel</a>
+</div>
+<div id="user-edit"><br>
+
+</div>
+<div id="createPost" >
+    <img th:src="@{/icon/publish.png}" onclick="allNone()"><br>
+<form th:action="@{/publish-post}" th:method="post" style="padding-left:80px;" enctype="multipart/form-data">
+    <label><b>Upload Picture/Video</b></label><br>
+    <input type="file" name="file" multiple required placeholder="upload Picture/Video" ><br>
+    <label><b>Caption</b></label><br>
+    <textarea name="caption" placeholder="Write Your Caption ..." required></textarea><br>
+    <label><b>Tags</b></label><br>
+    <textarea type="text" name="tags" placeholder="tag1 tag2 ..."></textarea><br>
+    <label><b>Location</b></label><br>
+    <input type="text" name="location" placeholder="location"><br>
+    <input type="submit" value="Publish Post" >
+</form>
+</div>
+
+<div class="container">
+    <div class="left-panel">
+        <img th:src="@{/icon/insta-logo.png}"><br>
+        <a href="/home"><img th:src="@{/icon/home.png}" style="height: 20px; width: 25px;"><span> Home</span></a><br>
+        <a href=""><img th:src="@{/icon/search.png}" style="height: 25px; width: 25px;"><span> Search</span></a><br>
+        <a href=""><img th:src="@{/icon/explore.png}" style="height: 25px; width: 25px;"><span> Explore</span></a><br>
+        <a href=""><img th:src="@{/icon/reels.png}" style="height: 25px; width: 25px;"><span> Reels</span></a><br>
+        <a href=""><img th:src="@{/icon/massage.png}" style="height: 25px; width: 25px;"><span> Messages</span></a><br>
+        <a href=""><img th:src="@{/icon/notification.png}" style="height: 25px; width: 25px;"><span> Notifications</span></a><br>
+        <a onclick="openCreatePost()"><img th:src="@{/icon/create.png}" style="height: 25px; width: 25px;"><span> Create</span></a><br>
+        <a href="/profile"><img th:src="@{/icon/profile.png}" style="height: 25px; width: 25px; border-radius: 50%;"><span> Profile</span></a><br>
+        <a href="/profile"><img th:src="@{/icon/more.png}" style="height: 25px; width: 25px;"><span>  More</span></a><br>
+    </div>
+    <div class="right-panel">
+        <div id="profile">
+            <div id="left-p" onclick="allNone()">
+                <img th:src="@{/icon/profile.png}">
+            </div>
+            <div id="right-p">
+                <span style="font-size: 22px;">chandan_ravi_4159 </span> <span style="margin-left: 15px;"><a th:href="@{/accounts/edit}">Edit
+              Profile</a><button onclick="settingPopup()" style="margin-left: 15px; border: none; background-color: white;"><img
+                    th:src="@{/icon/setting1.png}"></button></span>
+                <br><br>
+                <span ><b>131</b> posts</span><span class="details"><b>131</b> followers</span><span class="details"><b>131</b>
+            following</span>
+                <br><br>
+                <span><b>Chandan Ravi</b></span>
+            </div>
+        </div>
+        <hr style="width: 90%;">
+        <div id="short-form" onclick="allNone()">
+            <span style="display: flex; margin-left: 25%;"><a href="#">posts </a><a href="#">reels </a><a href="#">saved </a><a href="#">tagged </a></span>
+        </div><br><br>
+        <div class="image-container">
+        <div th:each="var:${allPosts}" >
+            <a th:href="@{/all-view/{id}/{start}(id=${var.postId},start=${0})}"><img th:src="@{/view/{id}(id=${var.postId})}" class="thumbnail-image"></a>
+        </div></div>
+        <footer onclick="allNone()">
+            <pre> <a href="https://about.meta.com/" >Meta</a>  <a href="https://about.instagram.com/" >About</a>   <a href="https://about.instagram.com/en_US/blog" >Blog</a>   <a href="https://about.instagram.com/about-us/careers" >Jobs</a>   <a href="https://help.instagram.com/" >Help</a>   <a href="https://developers.facebook.com/docs/instagram" >API</a>   <a href="https://privacycenter.instagram.com/policy/?entry_point=ig_help_center_data_policy_redirect" > Privacy</a>   <a href="https://help.instagram.com/581066165581870/" > Terms</a>   <a href="https://www.instagram.com/directory/profiles/" >Top accounts</a>   <a href="https://www.instagram.com/explore/locations/" >Locations</a>   <a href="https://www.instagram.com/web/lite/" >Instagram Lite</a>   <a href="https://www.facebook.com/help/instagram/261704639352628" >Contact uploading and non-users</a>   <a href="https://about.meta.com/technologies/meta-verified/" > Meta Verified</a></pre>
+            <p style="margin-left: 40%; font-size: 12px;">© 2023 Instagram Clone </p>
+        </footer>
+    </div>
+</div>
+</body>
+</html>

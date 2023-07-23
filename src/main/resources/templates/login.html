@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="Short Icon" type="image/png" ; th:href="@{/icon/insta-icon.png}">
+    <style>
+        #login-form {
+            margin: -600px 0px 5px 500px;
+            border: 0.5px solid rgb(216, 212, 212);
+            width: 350px;
+            height: 350px;
+        }
+
+        #login-form img {
+            margin-top: 8%;
+            padding-left: 20%;
+            height: 60px;
+        }
+
+        #login-form form {
+            margin-top: 8%;
+            padding-left: 12%;
+            height: 60px;
+        }
+
+        #login-form form input {
+            width: 250px;
+            height: 35px;
+        }
+
+        #picture {
+            border-radius: 40%;
+            margin-left: 23%;
+        }
+
+        #acc-form {
+            margin-left: 500px;
+            padding-left: 60px;
+            border: 0.5px solid rgb(216, 212, 212);
+            width: 290px;
+            height: 60px;
+        }
+
+        #g-form p {
+            margin-left: 570px;
+            padding-left: 60px;
+            width: 290px;
+
+        }
+
+        #g-form span {
+            margin-left: 480px;
+            padding-left: 60px;
+            width: 290px;
+        }
+
+        footer {
+            margin: 100px 0px 50px 160px;
+            font-size: 11px;
+        }
+
+        footer a {
+            text-decoration: none;
+            color: gray;
+        }
+
+    </style>
+    <script>
+        // Array of image URLs
+        var images = [
+          "/icon/home1.png",
+          "/icon/home2.png",
+          "/icon/home3.png"
+        ];
+    
+        var currentIndex = 0; // Index of the current image
+    
+        function changeImage() {
+          var img = document.getElementById("image");
+          img.src = images[currentIndex];
+          currentIndex = (currentIndex + 1) % images.length; // Move to the next image index
+        }
+    
+        // Call the changeImage function every second
+        setInterval(changeImage, 900);
+
+    </script>
+</head>
+
+<body>
+<div style="margin: 3% 0% 0% 15%;">
+    <img id="image" th:src="@{/icon/home1.png}">
+    <div id="login-form">
+        <img th:src="@{/icon/insta-logo.png}"><br><br>
+        <form th:action="@{/login}" th:method="post">
+            <input type="text" placeholder="Phone  number, username or email address" name="email" required><br><br>
+            <input type="password" placeholder="password" name="password" required><br><br>
+            <input type="submit" value="Log in" style="border-radius: 10px; background-color: cornflowerblue;">
+        </form>
+        <br>
+    </div>
+    <br>
+    <div id="acc-form">
+        <p>Don't have an account? <a href="/register">Sign Up</a></p>
+    </div>
+    <div id="g-form">
+        <p>Get the app.</p>
+        <span><a
+                href="https://l.instagram.com/?u=https%3A%2F%2Fitunes.apple.com%2Fapp%2Finstagram%2Fid389801252%3Fct%3Digweb.loginPage.badge%26mt%3D8%26pt%3D428156%26vt%3Dlo&e=AT3LsmVb9f9ZLymXu3IySbIqTs-sPKuxRFgqOU5rus0uROIpe3VpTng_-MytD_ub4FP8n9L49P7bdc8oMrDM9JnxAGCt5IMcKo0iVqqtpwAsFKfaqPNnQ9YDwM7y9tcGdqK2VrxUonuCQw">
+                    <img th:src="@{/icon/g-app1.png}"></a>
+                <a
+                        href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3D2F42DF10-0B5F-4C28-B500-EEA721E6CD74%26utm_campaign%3DloginPage%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge&pli=1">
+                    <img th:src="@{/icon/g-app.png}"></a></span>
+    </div>
+</div>
+
+<footer>
+    <pre> <a href="https://about.meta.com/">Meta</a>  <a href="https://about.instagram.com/">About</a>   <a
+            href="https://about.instagram.com/en_US/blog">Blog</a>   <a
+            href="https://about.instagram.com/about-us/careers">Jobs</a>   <a
+            href="https://help.instagram.com/">Help</a>   <a
+            href="https://developers.facebook.com/docs/instagram">API</a>   <a
+            href="https://privacycenter.instagram.com/policy/?entry_point=ig_help_center_data_policy_redirect"> Privacy</a>   <a
+            href="https://help.instagram.com/581066165581870/"> Terms</a>   <a
+            href="https://www.instagram.com/directory/profiles/">Top accounts</a>   <a
+            href="https://www.instagram.com/explore/locations/">Locations</a>   <a
+            href="https://www.instagram.com/web/lite/">Instagram Lite</a>   <a
+            href="https://www.facebook.com/help/instagram/261704639352628">Contact uploading and non-users</a>   <a
+            href="https://about.meta.com/technologies/meta-verified/"> Meta Verified</a></pre>
+    <p style="margin-left: 40%; font-size: 12px;">© 2023 Instagram Clone </p>
+</footer>
+</body>
+
+</html> 
