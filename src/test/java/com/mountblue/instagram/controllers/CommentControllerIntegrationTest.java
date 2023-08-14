@@ -86,4 +86,5 @@ public void testDeleteComment() throws Exception {
     List<Comment> comments = commentRepository.findByPostId(postId);
     assertEquals(0, comments.size());
 }
+
 }

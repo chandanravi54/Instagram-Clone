@@ -2,7 +2,6 @@ package com.mountblue.instagram.service;
 
 import com.mountblue.instagram.model.Comment;
 import com.mountblue.instagram.repository.CommentRepository;
-import com.mountblue.instagram.service.CommentService;
 import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,13 +16,14 @@ import static org.junit.Assert.assertNull;
 @RunWith(SpringRunner.class)
 @DataMongoTest
 public class CommentServiceIntegrationTest {
-
+    private ObjectId postId;
     @Autowired
     private CommentRepository commentRepository;
     private CommentService commentService;
 
     @Before
     public void setup() {
+        postId = new ObjectId();
         commentService = new CommentService(commentRepository);
     }
 
@@ -49,5 +49,19 @@ public class CommentServiceIntegrationTest {
         // Attempt to retrieve the deleted comment from the database
         Comment deletedComment = commentRepository.findById(comment.getId());
         assertNull(deletedComment);
+    }
+    @Test
+    public void testUpdateComment() {
+        String updatedCommentText = "Updated comment text";
+
+        Comment comment = new Comment();
+        comment.setId(postId);
+        comment.setCommentText("Old comment text");
+        commentRepository.save(comment);
+
+        commentService.updateComment(postId, updatedCommentText);
+
+        Comment updatedComment = commentRepository.findById(postId);
+        assertEquals(updatedCommentText, updatedComment.getCommentText());
     }
 }

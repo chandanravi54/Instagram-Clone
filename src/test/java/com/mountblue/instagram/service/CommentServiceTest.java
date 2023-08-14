@@ -10,6 +10,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -47,5 +48,22 @@ public class CommentServiceTest {
 
         // Verify that the deleteById method of the commentRepository was called with the correct argument
         verify(commentRepository, times(1)).deleteById(eq(commentId));
+    }
+    @Test
+    public void testUpdateComment() {
+        String updatedCommentText = "Updated comment text";
+
+        Comment comment = new Comment();
+        comment.setId(postId);
+        comment.setCommentText("Old comment text");
+
+        when(commentRepository.findById(postId)).thenReturn(comment);
+
+        commentService.updateComment(postId, updatedCommentText);
+
+        verify(commentRepository, times(1)).findById(postId);
+        verify(commentRepository, times(1)).save(comment);
+
+        assertEquals(updatedCommentText, comment.getCommentText());
     }
 }
