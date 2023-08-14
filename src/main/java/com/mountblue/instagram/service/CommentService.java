@@ -2,7 +2,6 @@ package com.mountblue.instagram.service;
 
 import com.mountblue.instagram.model.Comment;
 import com.mountblue.instagram.repository.CommentRepository;
-import com.mountblue.instagram.repository.UserRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +11,8 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    @Autowired
-    private UserRepository userRepository;
-
     public CommentService(CommentRepository commentRepository) {
+        this.commentRepository=commentRepository;
     }
 
     public void addComment(ObjectId postId, String commentText) {
