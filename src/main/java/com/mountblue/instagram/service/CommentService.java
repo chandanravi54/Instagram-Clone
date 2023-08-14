@@ -14,6 +14,10 @@ public class CommentService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public CommentService(CommentRepository commentRepository) {
+    }
+
     public void addComment(ObjectId postId, String commentText) {
         Comment comment = new Comment();
         comment.setPostId(postId);
